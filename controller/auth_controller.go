@@ -35,7 +35,7 @@ func (ac *AuthController) Register(c echo.Context) error {
 	email := c.FormValue("email")
 	password := c.FormValue("password")
 
-	user := model.User{
+	user := model.Users{
 		Email:    email,
 		Password: password,
 	}
@@ -48,7 +48,7 @@ func (ac *AuthController) Login(c echo.Context) error {
 	email := c.FormValue("email")
 	password := c.FormValue("password")
 
-	var user model.User
+	var user model.Users
 	ac.DB.Where("email = ?", email).First(&user)
 
 	if user.ID == 0 || user.Password != password {
